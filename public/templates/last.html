@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Filesharing</title>
+	<style>
+		{{ source('css/bootstrap.min.css') }}
+	    {{ source('css/header.css') }}
+	    {{ source('css/last.css') }}
+	</style>
+</head>
+<body>
+	{{ include('header.html', sandboxed = true) }}
+	<div class="content">
+		{% if table != null %}
+		<table class="table">
+			<tr>
+				<th>Дата загрузки</th>
+				<th>Ссылка</th>
+				<th>Имя файла</th>
+				<th>Размер</th>
+			</tr>
+		    {% for row in table %}
+		    <tr>
+		    	<td>{{ row["date"] }}</td>
+		    	<td><a href="{{ row["link"] }}">Скачать</a></td>
+		    	<td>{{ row["name"] }}</td>
+		    	<td>{{ (row["size"] / (1024 * 1024))|round(1, "ceil") }}Мб</td>
+		    </tr>
+		    {% endfor %}
+		</table>
+		{% else %}
+		Пока загруженных файлов нет!
+		{% endif %}
+	</div>
+	<script>
+		{{ source('js/bootstrap.min.js') }}
+	</script>
+</body>
+</html>

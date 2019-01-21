@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Filesharing</title>
+	<meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <style>
+    	{{ source('css/bootstrap.min.css') }}
+    	{{ source('css/header.css') }}
+    	{{ source('css/file.css') }}
+    </style>
+</head>
+<body>
+	{{ include('header.html', sandboxed = true) }}
+	<div class="content">
+		{% if error == null %}
+		<form name="download" action="/download/{{ id }}/{{ name }}" method="POST">
+		  <div class="form-group row">
+		    <label for="staticName" class="col-sm-2 col-form-label">Имя</label>
+		    <div class="col-sm-10">
+		      <input type="text" readonly class="form-control-plaintext" id="staticName" value="{{ name }}">
+		    </div>
+		  </div>
+		  <div class="form-group row">
+		    <label for="staticSize" class="col-sm-2 col-form-label">Размер</label>
+		    <div class="col-sm-10">
+		      <input type="text" readonly class="form-control-plaintext" id="staticSize" value="{{ size }}">
+		    </div>
+		  </div>
+		  <div class="form-group row">
+		    <label for="staticTime" class="col-sm-2 col-form-label">Время загрузки</label>
+		    <div class="col-sm-10">
+		      <input type="text" readonly class="form-control-plaintext" id="staticTime" value="{{ time }}">
+		    </div>
+		  </div>
+		  {% if comment != null %}
+		  <div class="form-group row">
+		    <label for="staticComment" class="col-sm-2 col-form-label">Комментарий</label>
+		    <div class="col-sm-10">
+		      <input type="text" readonly class="form-control-plaintext" id="staticComment" value="{{ comment }}">
+		    </div>
+		  </div>
+		  {% endif %}
+		  {% if mime matches "/image/" %}
+		  <div class="form-group row">
+		    <label for="staticPreview" class="col-sm-2 col-form-label">Превью</label>
+		    <div class="col-sm-10">
+		      <img src="{{ preview }}" class="preview" id="staticPreview">
+		    </div>
+		  </div>
+		  {% elseif mime matches "/video/" %}
+		  <div class="form-group row">
+		    <label for="staticVideo" class="col-sm-2 col-form-label">Видео</label>
+		    <video controls="controls"><source src="/watch/{{ id }}/{{ name }}" type="{{ mime }}"></video>
+		  </div>
+		  {% elseif mime matches "/audio/" %}
+		  <div class="form-group row">
+		    <label for="staticAudio" class="col-sm-2 col-form-label">Аудио</label>
+		    <audio controls="controls"><source src="/watch/{{ id }}/{{ name }}" type="{{ mime }}"></audio>
+		  </div>
+		  {% endif %}
+		  <button type="submit" class="btn btn-primary mb-2">Скачать</button>
+		</form>
+		{% else %}
+		{% for err in error %}
+		{{ err }}
+		{% endfor %}
+		{% endif %}
+	</div>
+	<script>
+		{{ source('js/bootstrap.min.js') }}
+	</script>
+</body>
+</html>

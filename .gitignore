@@ -1,0 +1,7 @@
+/composer.lock
+/install.bat
+/vendor/
+/upload
+/app/db.ini
+/public/preview/
+/public/compilation_cache/

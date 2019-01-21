@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Filesharing</title>
+	<meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <style>
+    	{{ source('css/bootstrap.min.css') }}
+    	{{ source('css/header.css') }}
+    	{{ source('css/index.css') }}
+    </style>
+</head>
+<body>
+	{{ include('header.html', sandboxed = true) }}
+	<div class="content">
+		{% for error in errors %}
+		<div>{{ error }}</div>
+		{% endfor %}
+		<h2>Привет!</h2>
+	    <form enctype="multipart/form-data" class="my-form" action="" method="POST">
+	    	<input type="hidden" name="token" value = {{ token }}>
+		    <input type="hidden" name="MAX_FILE_SIZE" value="{{ constant("MAX_FILE_SIZE") }}">
+		    <div class="input-group comment-form">
+			  <div class="input-group-prepend">
+			    <span class="input-group-text">Комментарий</span>
+			  </div>
+			  <textarea class="form-control" name="comment" aria-label="With textarea"></textarea>
+			</div>
+		    <div class="input-group">
+			  <div class="custom-file">
+			    <input type="file" name="userfile" class="custom-file-input" id="inputGroupFile04" aria-describedby="inputGroupFileAddon04">
+			    <label class="custom-file-label" for="inputGroupFile04">Выберите файл до 100мб</label>
+			  </div>
+			  <div class="input-group-append">
+			    <button class="btn btn-outline-secondary" type="submit" id="inputGroupFileAddon04">Отправить</button>
+			  </div>
+			</div>
+		</form>
+	</div>
+	<script>
+		{{ source('js/bootstrap.min.js') }}
+	</script>
+</body>
+</html>

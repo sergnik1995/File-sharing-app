@@ -1,0 +1,7 @@
+<div class="my-header">
+	<a href="/" class="btn btn-primary">Главная</a>
+	{% if fileCookie %}
+	<a href="{{ fileCookie }}" class="btn btn-primary">Мой файл</a>
+	{% endif %}
+	<a href="/last" class="btn btn-primary">Последние 100 загруженных файлов</a>
+</div>
