@@ -1,4 +1,5 @@
-CREATE TABLE public.files
+CREATE SEQUENCE files_id_seq START 1;
+CREATE TABLE files
 (
     id integer NOT NULL DEFAULT nextval('files_id_seq'::regclass),
     name character varying(20) COLLATE pg_catalog."default" NOT NULL,
