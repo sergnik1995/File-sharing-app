@@ -2,6 +2,6 @@
 /install.bat
 /vendor/
 /upload
-/app/db.ini
+/app/Model/db.ini
 /public/preview/
 /public/compilation_cache/
